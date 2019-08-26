@@ -94,27 +94,4 @@
 </html>
 
 
-<script type="text/javascript">
-    $("#submitButton").on("click", function (event) {
-        event.preventDefault();
-        var scoreArr = [];
-        for (i = 1; i < 11; i++) {
-            scoreArr.push($("#q" + i).val());
-        }
-        var newFriend = {
-            name: $("#nameForm").val().trim(),
-            photo: $("#photoForm").val().trim(),
-            scores: scoreArr
-        };
-        $.post("/api/survey", newFriend, function (data) {
-            if (data) {
-                console.log(data.name);
-                $("#exampleModal").modal("show");
-                $("#matchedFriendName").text(data.name);
-                $('.modal-body').append("<img src=" + data.photo + " style='max-height:250px'; />")
-            };
-        });
-    });
-</script>
-
 <a class="btn btn-primary btn-lg" href="../home" role="button">Go back home</a>
