@@ -1,14 +1,141 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Zak's Friend Finder</title>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+<head>
+    <title>Zak's Survey</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
 
 
-<!-- Insert survey here -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">You are matched with...</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="matchedFriendName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <h1 class="display-4">Survey Questions</h1>
+                <hr>
+
+                <!-- First Form -->
+                <form>
+                    <h4>About You</h4>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name (Required)</label>
+                        <input type="name" class="form-control" id="nameForm" aria-describedby="emailHelp">
+                    </div>
+                  
+                    <hr>
+                </form>
+
+
+                <!-- Second Form -->
+                <form>
+                    <!-- Start of a question-->
+                    <div class="form-group">
+
+                        <h4>Question 1</h4>
+                        <label for="formGroupExampleInput">Your mind is always buzzing with unexplored ideas and
+                            plans.</label>
+                        <div class="col-md-3">
+                            <select class="custom-select" id="q1">
+                                <option selected>Select an option</option>
+                                <option value="1">1 (Strongly Disagree)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5 (Strongly Agree)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- End of a question -->
+
+
+                    <!-- Start of a question-->
+                    <div class="form-group">
+
+                        <h4>Question 2</h4>
+                        <label for="formGroupExampleInput">Generally speaking, you rely more on your experience than
+                            your imagination.</label>
+                        <div class="col-md-3">
+                            <select class="custom-select" id="q2">
+                                <option selected>Select an option</option>
+                                <option value="1">1 (Strongly Disagree)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5 (Strongly Agree)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- End of a question -->
+                    <!-- Start of a question-->
+                    <div class="form-group">
+
+                   
+
+                </form>
+
+                <!-- Submit Button -->
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="submitButton">Submit</button>
+                <hr>
+
+           
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+    $("#submitButton").on("click", function (event) {
+        event.preventDefault();
+        var scoreArr = [];
+        for (i = 1; i < 11; i++) {
+            scoreArr.push($("#q" + i).val());
+        }
+        var newFriend = {
+            name: $("#nameForm").val().trim(),
+            photo: $("#photoForm").val().trim(),
+            scores: scoreArr
+        };
+        $.post("/api/survey", newFriend, function (data) {
+            if (data) {
+                console.log(data.name);
+                $("#exampleModal").modal("show");
+                $("#matchedFriendName").text(data.name);
+                $('.modal-body').append("<img src=" + data.photo + " style='max-height:250px'; />")
+            };
+        });
+    });
+</script>
+
+<a class="btn btn-primary btn-lg" href="../home" role="button">Go back home</a>

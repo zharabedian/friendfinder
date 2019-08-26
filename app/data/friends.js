@@ -1,13 +1,13 @@
 var friends = [
     {
-        name: "Zak",
-        photo: "https://media.licdn.com/dms/image/C5603AQHPPaIU3xX21g/profile-displayphoto-shrink_200_200/0?e=1571875200&v=beta&t=GeA6PPYOwUZc3F10uj6KBiB6YQp3So9DVy5gPEXCcxU",
+        name: "Stewie",
+        photo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/02/Stewie_Griffin.png/220px-Stewie_Griffin.png",
     },
     {
-        name: "Brittany",
-        photo: "https://d1hbpr09pwz0sk.cloudfront.net/profile_pic/brittany-waser-8d5fa826",
+        name: "Peter",
+        photo: "https://cdn.imgbin.com/25/18/6/imgbin-brian-griffin-peter-griffin-glenn-quagmire-family-guy-online-griffin-family-family-guy-photos-the-family-guy-character-gQDDRmZ7qVJ3sp8pttQd8esHu.jpg",
     
     },
 
-
+];
 module.exports = friends;
